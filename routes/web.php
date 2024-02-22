@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Models\User;
+use App\Http\Controllers\home;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,16 +41,33 @@ Route::get('/',function(){
 // Route::match(['get','post'],'unicode', function(){
 //     return $_SERVER['REQUEST_METHOD'];
 // });
+Route::get('/', 'App\Http\Controllers\home@index')->name('home');
+Route::get('/tin-tuc', 'home@getNew')->name('news');
+Route::get('/categories', [home::class,'categories']);
+
+
+
 Route::prefix('admin')->group(function() {
 
     Route::get('show_form', function() {
         return view('form');
-    });
+    })->name('admin.show_form');
 
-    Route::get('unicode', function() {
-        return 'phương thức get của path/unicode';
-    });
-    Route::prefix('product')->group (function(){
+    Route::get('tin-tức/{slug}-{id}.html', function($slug=null,$id=null) {
+        $content = 'phương thức get của path/unicode ';
+        $content.='id ='.$id.'</br>';
+        $content.='Slug = '. $slug ;
+        return $content;
+    })->where(
+        [
+            'slug'=>'[a-z-]+',
+            'id ='=>'[0-9]+'
+        ]
+    );
+
+
+
+    Route::prefix('product')->middleware('checkpermission')-> group (function(){
         Route::get('/', function() { 
             return 'danh sach san pham';
         });
