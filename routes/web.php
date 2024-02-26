@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Models\User;
 use App\Http\Controllers\Admin\ProductsController;
+use App\Http\Controllers\Admin\Dashboard;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,6 +17,10 @@ use App\Http\Controllers\Admin\ProductsController;
 */
 
 // Client Routes
+route::get('/', function(){
+    return '<h1 style="text-align: centre;"> TRANG CHỦ UNICODE </h1>';
+})->name('home');
+
 Route:Route::prefix('categories')->group(function(){
     // danh sách chuyên mục
     Route::get('/',[CategoriesController::class,'index'])->name('categories.list');
@@ -37,9 +42,10 @@ Route:Route::prefix('categories')->group(function(){
 
 });
 
-Route::prefix('admin')->group(function(){
-        Route::resource('products', ProductsController::class);
-    
+Route::middleware('auth.login')->prefix('admin')->group(function(){
+    Route::get('/',[Dashboard::class,'index']);
+    Route::resource('products', ProductsController::class)->middleware('auth.admin.product');
+
 });
 
 
