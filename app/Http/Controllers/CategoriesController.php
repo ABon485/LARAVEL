@@ -42,13 +42,15 @@ class CategoriesController extends Controller
 
             // $id = $request->input('id');
             // echo $id;
+            $query = $request->query();
+            dd($query);
 
 
         // $input = $request->input();
         //     dd($input);
 
-          $name = request('name','Unicode');
-            dd($name);
+        //   $name = request('name','Unicode');
+        //     dd($name);
 
 
 
@@ -69,8 +71,10 @@ class CategoriesController extends Controller
     }
     // show form thêm dữ liệu (phương thúcw GET)
     public function addCategory(Request $request){
-        $path = $request->path();
-        echo $path;
+        // $path = $request->path();
+        // echo $path;
+        $cateName = $request->old('category_name');
+        
 
         return view ('clients/categories/add');
     }
@@ -85,10 +89,48 @@ class CategoriesController extends Controller
         // }
         // return redirect(route('categories.add'));
         // return 'Submit thêm chuyên mục:';
+
+        // $cateName = $request->query();
+
+        if($request->has('category_name')){
+            $cateName = $request->category_name;
+            $request ->flash();
+            return redirect(route('categoríe.add'));
+        }else{
+            return 'không có category';
+        }
+
     }
     // xoá dữ liệu (phương thức delete)
     public function deleteCategory($id){
         return 'Submit xoá chuyên mục:'.$id;
+
+    }
+    public function getFile(){
+        return view('clients/categories/file');
+    }
+    // xuwr lys laays thoong tin file
+    public function handleFile(Request $request){
+        // $file = $request->file('photo');
+        if($request->hasFile('photo')){
+            iff($request->photo->isValid()){
+                $file = $request->photo;
+                // $path = $file->path();
+                // $ext = $file->extension();
+                // $path = $file->store('file-txt','local');
+                // $path = $file->storeAs('file-txt','khoa-hoc.txt');
+                // $fileName = $file->getClientOriginaName();
+                
+
+                // đổi tên
+                $fileName = md5(uniqid(()).'.'.$ext);
+                dd($fileName);
+            }else{
+                return 'upload file khoong thanh cong';
+            }
+        }else{
+            return 'vui longf chonj file';
+        }
 
     }
 }
