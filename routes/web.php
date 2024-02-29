@@ -5,7 +5,7 @@ use App\Models\User;
 use App\Http\Controllers\Admin\ProductsController;
 use App\Http\Controllers\Admin\Dashboard;
 use App\Http\Controllers\home;
-
+use App\Http\Controllers\CategoriesController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,9 +18,9 @@ use App\Http\Controllers\home;
 */
 
 // Client Routes
-route::get('/',[home::class, 'index'])->name('home');
+route::get('/',[home::class, 'index'])->name('home')->middleware('auth.admin');
 
-Route:Route::prefix('categories')->group(function(){
+Route:Route::middleware('auth.admin')->prefix('categories')->group(function(){
     // danh sách chuyên mục
     Route::get('/',[CategoriesController::class,'index'])->name('categories.list');
 
