@@ -38,6 +38,11 @@ Route:Route::middleware('auth.admin')->prefix('categories')->group(function(){
     // xoá chuyên mục
     Route::delete('/delete/{id}', [CategoriesController::class, 'deleteCategory'])->name('categories.delete');
 
+    // xử lý file
+    Route::post('/upload',[CategoriesController::class,'handleFile'])->name('categories.upload');
+
+    // hieenr thij form
+    Route::get('/upload',[CategoriesController::class,'getFile']);
 
 });
 
