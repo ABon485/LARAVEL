@@ -20,6 +20,9 @@ class checkLoginAdmin
         if(!$this->isLogin()){
             return redirect(route('home'));
         }
+        // if($request->is('admin/*')){
+        //     echo 'Khu vực quản trị';
+        // }
         return $next($request);
     }
     public function isLogin(){
