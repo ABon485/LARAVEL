@@ -18,6 +18,8 @@ use App\Http\Controllers\HomeController;
 |
 */
 Route::get('/',[HomeController::class,'index']);
+Route::get('/san-pham',[HomeController::class,'products']);
+
 
 // Client Routes
 // route::get('/',[home::class, 'index'])->name('home')->middleware('auth.admin');
