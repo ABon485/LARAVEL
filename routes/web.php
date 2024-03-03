@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\ProductsController;
 use App\Http\Controllers\Admin\Dashboard;
 use App\Http\Controllers\home;
 use App\Http\Controllers\CategoriesController;
+use App\Http\Controllers\HomeController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,9 +17,10 @@ use App\Http\Controllers\CategoriesController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/',[HomeController::class,'index']);
 
 // Client Routes
-route::get('/',[home::class, 'index'])->name('home')->middleware('auth.admin');
+// route::get('/',[home::class, 'index'])->name('home')->middleware('auth.admin');
 
 Route:Route::middleware('auth.admin')->prefix('categories')->group(function(){
     // danh sách chuyên mục
@@ -56,13 +58,17 @@ Route::middleware('auth.login')->prefix('admin')->group(function(){
 
 
 
+Route::get('/',function(){
+    return view('home');
+});
 
+// Route::get('myroute/{ten}',function($ten){
+//     return 'chào bạn '. $ten;
+// });
 
-
-
-
-
-
+Route::get('myroute/{userId}/{name?}',function($ten='default'){
+    return 'chào bạn '. $ten;
+});
 
 
 
@@ -96,7 +102,6 @@ Route::middleware('auth.login')->prefix('admin')->group(function(){
 // Route::get('/', 'App\Http\Controllers\home@index')->name('home');
 // Route::get('/tin-tuc', 'home@getNew')->name('news');
 // Route::get('/categories', [home::class,'categories']);
-
 
 
 // Route::prefix('admin')->group(function() {
