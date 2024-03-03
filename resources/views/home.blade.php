@@ -4,10 +4,22 @@
     {!! !empty($content) ? $content : false !!}
 </div>
 <hr>
+@php
+$messages ='Đặt hàng thành công';
+@endphp
 
-@for ($i = 1; $i <= 10; $i++)
-    @if ($i == 5)
-        @continue
-    @endif
-    <p>Phần tử thứ: {{$i}}</p>
-@endfor
+@include('parts.notice');
+
+{{-- @php
+ $number = 5;
+ if($number>= 10){
+    $total = $number +20;
+ }   else {
+    $total = $number+10;
+ }
+@endphp
+<h3>kết quả: {{$number}}- {{$total}}</h3>
+
+<script>
+    Hello,@{{$name}}
+</script> --}}
