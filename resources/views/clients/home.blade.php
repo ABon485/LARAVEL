@@ -3,18 +3,23 @@
     {{ $title }}
 @endsection
 @section('sidebar')
+    @parent
     <h3>home sidebar</h3>
 @endsection
 
 @section('content')
     <h1>Trang chủ</h1>
+    @include('clients.content.silde')
+    @include('clients.content.about')
 @endsection
 
 @section('css')
-    <header>
+<style>
+    .header{
         background: blue;
-        color: #fff;
-    </header>
+        color: #ffff;
+    }
+</style>
 @endsection
 
 @section('js')
