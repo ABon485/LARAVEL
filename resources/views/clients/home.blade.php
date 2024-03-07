@@ -12,6 +12,10 @@
     @datetime("2021-12-15 15:00:30")
     @include('clients.content.silde')
     @include('clients.content.about')
+
+    @env('local')
+        <p>Môi trường web</p>
+    @endenv
 @endsection
 
 @section('css')
