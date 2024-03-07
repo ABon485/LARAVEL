@@ -9,6 +9,7 @@
 
 @section('content')
     <h1>Trang chủ</h1>
+    @datetime("2021-12-15 15:00:30")
     @include('clients.content.silde')
     @include('clients.content.about')
 @endsection
@@ -25,7 +26,7 @@
 @section('js')
 <script>
     documennt.querySelector('.show').onclick = function(){
-        alert('yhanhf công');
+        alert('thành công');
     }
 </script>
 @endsection
