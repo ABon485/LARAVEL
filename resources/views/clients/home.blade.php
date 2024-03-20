@@ -16,6 +16,10 @@
     @env('local')
         <p>Môi trường web</p>
     @endenv
+    <x-alert type="info" :content="$message" data-icon='facebook/>
+    {{-- <x-Button />
+    <x-form-button /> --}}
+
 @endsection
 
 @section('css')
