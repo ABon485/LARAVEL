@@ -7,6 +7,10 @@ use App\Http\Controllers\Admin\Dashboard;
 use App\Http\Controllers\home;
 use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\HomeController;
+use Illuminate\Http\response;
+
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -21,6 +25,16 @@ Route::get('/',[HomeController::class,'index'])->name('home');
 Route::get('/san-pham',[HomeController::class,'product'])->name('product');
 Route::get('/them-san-pham',[HomeController::class,'getAdd'])->name('add');
 Route::post('/them-san-pham',[HomeController::class,'getAdd']);
+Route::post('lay-thong-tin',[HomeController::class,'getArr']);
+
+Route::get('demo-response', function(){
+    $content = '<h2>Học lập trình tại UNicode </h2>';
+    $response = (new Response())->cookie('unicode-','Training PHP',30);
+    return $response;
+});
+
+Route::get('demo-response-2', function(){
+});
 
 // Client Routes
 // route::get('/',[home::class, 'index'])->name('home')->middleware('auth.admin');
